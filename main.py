@@ -18,6 +18,9 @@ POEM = (
 
 
 def main() -> None:
+    # Gate guard: the entry must be 1-280 Unicode characters, not only whitespace.
+    if not 1 <= len(POEM) <= 280 or not POEM.strip():
+        raise SystemExit("poem fails the 1-280 character gate")
     out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
     os.makedirs(out_dir, exist_ok=True)
     with open(os.path.join(out_dir, "entry.txt"), "w", encoding="utf-8") as f:
